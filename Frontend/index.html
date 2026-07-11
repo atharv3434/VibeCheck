@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Photogram</title>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+  <div id="app">
+    <!-- Nav -->
+    <nav id="navbar" class="hidden">
+      <div class="nav-inner">
+        <a class="nav-logo" href="/" onclick="navigate('/')">📸 Photogram</a>
+        <div class="nav-search">
+          <input id="search-input" placeholder="Search users…" oninput="debounceSearch(this.value)"/>
+          <div id="search-results" class="search-drop hidden"></div>
+        </div>
+        <div class="nav-icons">
+          <button class="nav-btn" onclick="navigate('/')" title="Home">🏠</button>
+          <button class="nav-btn" onclick="navigate('/explore')" title="Explore">🔍</button>
+          <button class="nav-btn" onclick="openNewPost()" title="New Post">➕</button>
+          <button class="nav-btn" id="notif-btn" onclick="navigate('/notifications')" title="Notifications">🔔<span id="notif-badge" class="badge hidden"></span></button>
+          <button class="nav-btn" onclick="navigate('/profile')" title="Profile">👤</button>
+          <button class="nav-btn" onclick="logout()" title="Logout">🚪</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main view -->
+    <main id="view"></main>
+  </div>
+
+  <!-- New Post Modal -->
+  <div id="post-modal" class="modal hidden">
+    <div class="modal-box">
+      <div class="modal-head"><h3>New Post</h3><button onclick="closeModal('post-modal')">✕</button></div>
+      <div id="post-preview" class="post-preview hidden"><img id="preview-img" src=""/></div>
+      <form id="post-form" onsubmit="submitPost(event)">
+        <label class="file-drop" id="file-drop">
+          <span>📷 Click or drop image here</span>
+          <input type="file" id="post-file" accept="image/*" onchange="previewImage(this)" required/>
+        </label>
+        <textarea id="post-caption" placeholder="Write a caption… #hashtags welcome" rows="3"></textarea>
+        <input id="post-location" placeholder="📍 Add location (optional)"/>
+        <button type="submit" class="btn-primary">Share Post</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Story Modal -->
+  <div id="story-modal" class="modal hidden">
+    <div class="story-viewer">
+      <button class="story-close" onclick="closeModal('story-modal')">✕</button>
+      <button class="story-nav left"  onclick="prevStory()">‹</button>
+      <button class="story-nav right" onclick="nextStory()">›</button>
+      <div class="story-header">
+        <img id="story-avatar" src=""/>
+        <span id="story-username"></span>
+        <span id="story-time" class="story-time"></span>
+      </div>
+      <img id="story-img" src=""/>
+      <div id="story-caption" class="story-caption"></div>
+      <div id="story-progress" class="story-progress"></div>
+    </div>
+  </div>
+
+  <!-- Story Upload Modal -->
+  <div id="story-upload-modal" class="modal hidden">
+    <div class="modal-box">
+      <div class="modal-head"><h3>Add Story</h3><button onclick="closeModal('story-upload-modal')">✕</button></div>
+      <form id="story-form" onsubmit="submitStory(event)">
+        <label class="file-drop">
+          <span>📷 Choose story image</span>
+          <input type="file" id="story-file" accept="image/*" required/>
+        </label>
+        <input id="story-caption-input" placeholder="Add a caption (optional)"/>
+        <button type="submit" class="btn-primary">Share Story</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/stories.js"></script>
+  <script src="/static/js/feed.js"></script>
+  <script src="/static/js/explore.js"></script>
+  <script src="/static/js/profile.js"></script>
+  <script src="/static/js/auth.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
