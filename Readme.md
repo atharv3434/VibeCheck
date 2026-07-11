@@ -1,5 +1,4 @@
 # Photogram — Instagram Clone
-
 A full-stack Instagram-style social media app built with FastAPI + vanilla HTML/CSS/JS.
 
 ---
