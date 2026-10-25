@@ -1,4 +1,5 @@
 // static/js/api.js — API client
+
 const API = {
     token: () => localStorage.getItem('token'),
     me:    () => JSON.parse(localStorage.getItem('me') || 'null'),
