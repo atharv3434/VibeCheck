@@ -1,4 +1,5 @@
 // static/js/app.js — SPA router + shared utilities
+
 const ROUTES = { '/': loadFeed, '/explore': loadExplore, '/notifications': loadNotifications, '/profile': loadOwnProfile }
 
 function navigate(path, push = true) {
@@ -17,7 +18,7 @@ function navigate(path, push = true) {
 
 window.addEventListener('popstate', () => navigate(location.pathname, false))
 
-// ── Auth guard ─────────────────────────────────────────────────────────────
+// ── Auth guard 
 
 function isLoggedIn() { return !!API.token() }
 
@@ -26,7 +27,7 @@ function requireAuth() {
   return true
 }
 
-// ── Bootstrap ──────────────────────────────────────────────────────────────
+// ── Bootstrap 
 
 window.addEventListener('DOMContentLoaded', async () => {
   if (!isLoggedIn()) { showAuth(); return }
@@ -42,7 +43,7 @@ function logout() {
   history.pushState({}, '', '/')
 }
 
-// ── Notifications polling ──────────────────────────────────────────────────
+// ── Notifications polling 
 
 async function pollNotifications() {
   const updateBadge = async () => {
@@ -83,7 +84,7 @@ async function loadNotifications() {
     </div>`
 }
 
-// ── Post modal ─────────────────────────────────────────────────────────────
+// ── Post modal 
 
 function openNewPost() {
   if (!requireAuth()) return
@@ -118,7 +119,7 @@ async function submitPost(e) {
   finally { btn.disabled = false; btn.textContent = 'Share Post' }
 }
 
-// ── Utilities ──────────────────────────────────────────────────────────────
+// ── Utilities
 
 function closeModal(id) { document.getElementById(id).classList.add('hidden') }
 function closeAllModals() { document.querySelectorAll('.modal').forEach(m => m.classList.add('hidden')) }
