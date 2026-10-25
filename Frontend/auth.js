@@ -1,4 +1,5 @@
 // static/js/auth.js
+
 function showAuth() {
     document.getElementById('navbar').classList.add('hidden')
     document.getElementById('view').innerHTML = `
